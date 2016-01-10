@@ -1,7 +1,7 @@
 include $(top_srcdir)/common.mk
 
 PHONY=check test all check-elget test-elget help
-EXTRA_DIST += gcd.py gcd.rb gdb
+EXTRA_DIST += gcd.rb
 
 #: overall help on running the make targets
 help:

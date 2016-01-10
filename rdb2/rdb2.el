@@ -13,35 +13,35 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;  `realgud:pry' Main interface to pry via Emacs
+;;  `realgud:rdb2' Main interface to rdb2 via Emacs
 (require 'cl)
+(require 'realgud)
+
 (require 'load-relative)
-(require-relative-list '("../../common/helper" "../../common/utils")
-		       "realgud-")
-(require-relative-list '("core" "track-mode") "realgud:pry-")
+(require-relative-list '("core" "track-mode") "realgud:rdb2-")
 
 ;; This is needed, or at least the docstring part of it is needed to
 ;; get the customization menu to work in Emacs 24.
-(defgroup realgud:pry nil
-  "The realgud interface to pry"
+(defgroup realgud:rdb2 nil
+  "The realgud interface to Ruby debugger2 (AKA rdb2)"
   :group 'realgud
-  :version "24.5")
+  :version "24.1")
 
 ;; -------------------------------------------------------------------
 ;; User definable variables
 ;;
 
-(defcustom realgud:pry-command-name
-  "pry"
+(defcustom realgud:rdb2-command-name
+  "rdb2"
   "File name for executing the and command options.
 This should be an executable on your path, or an absolute file name."
   :type 'string
-  :group 'realgud:pry)
+  :group 'realgud:rdb2)
 
-(declare-function realgud:pry-track-mode     'realgud:pry-track-mode)
-(declare-function realgud-command            'realgud:pry-core)
-(declare-function realgud:pry-parse-cmd-args 'realgud:pry-core)
-(declare-function realgud:pry-query-cmdline  'realgud:pry-core)
+(declare-function realgud:rdb2-track-mode     'realgud:rdb2-track-mode)
+(declare-function realgud-command            'realgud:rdb2-core)
+(declare-function realgud:rdb2-parse-cmd-args 'realgud:rdb2-core)
+(declare-function realgud:rdb2-query-cmdline  'realgud:rdb2-core)
 (declare-function realgud:run-process        'realgud-core)
 (declare-function realgud:flatten            'realgud-utils)
 
@@ -50,8 +50,8 @@ This should be an executable on your path, or an absolute file name."
 ;;
 
 ;;;###autoload
-(defun realgud:pry (&optional opt-cmd-line no-reset)
-  "Invoke the pry debugger and start the Emacs user interface.
+(defun realgud:rdb2 (&optional opt-cmd-line no-reset)
+  "Invoke the rdb2 debugger and start the Emacs user interface.
 
 OPT-CMD-LINE is treated like a shell string; arguments are
 tokenized by `split-string-and-unquote'.
@@ -66,24 +66,10 @@ fringe and marginal icons.
 "
 
   (interactive)
-  (let* ((cmd-str (or opt-cmd-line (realgud:pry-query-cmdline "pry")))
-	 (cmd-args (split-string-and-unquote cmd-str))
-	 (parsed-args (realgud:pry-parse-cmd-args cmd-args))
-	 (script-args (caddr parsed-args))
-	 (script-name (car script-args))
-	 (parsed-cmd-args
-	  (cl-remove-if 'nil (realgud:flatten parsed-args)))
-	 (cmd-buf (realgud:run-process realgud:pry-command-name
-				       script-name parsed-cmd-args
-				       'realgud:pry-minibuffer-history
-				       nil))
-	 )
-    (if cmd-buf
-	(with-current-buffer cmd-buf
-	  (realgud-command "set annotate 1" nil nil nil)
-	  )
-      )
-    )
+  (realgud:run-debugger "rdebug" 'rdebug-query-cmdline
+			'rdebug-parse-cmd-args
+			'realgud:rdebug-minibuffer-history
+			opt-cmd-line no-reset)
   )
 
 (provide-me "realgud-")
