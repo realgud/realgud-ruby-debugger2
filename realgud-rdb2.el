@@ -42,4 +42,4 @@
 (provide-me)
 
 
-;;; realgud-rdb.el ends here
+;;; realgud-rdb2.el ends here

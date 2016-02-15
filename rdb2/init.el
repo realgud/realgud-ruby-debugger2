@@ -85,6 +85,9 @@ realgud-loc-pat struct")
 (setf (gethash "rails-backtrace" realgud:rdb2-pat-hash)
       realgud-rails-backtrace-loc-pat)
 
+(setf (gethash "rspec-backtrace" realgud:rdb2-pat-hash)
+      realgud-rspec-backtrace-loc-pat)
+
 ;;  Regular expression that describes a debugger "backtrace" command line.
 ;;  e.g.
 ;; --> #0 at line /usr/bin/irb:12
@@ -137,6 +140,8 @@ realgud-loc-pat struct")
 	;;  (0 rdebug-frames-current-frame-face append))
 	))
 
+
+(setf (gethash "rdb2" realgud:variable-basename-hash) "realgud:rdb2")
 
 (setf (gethash "rdb2" realgud-pat-hash) realgud:rdb2-pat-hash)
 
