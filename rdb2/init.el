@@ -81,12 +81,14 @@ realgud-loc-pat struct")
 (setf (gethash "dollar-bang" realgud:rdb2-pat-hash)
       realgud-ruby-dollar-bang-loc-pat)
 
+
 ;;  Regular expression that describes a Ruby $! string
 (setf (gethash "rails-backtrace" realgud:rdb2-pat-hash)
       realgud-rails-backtrace-loc-pat)
 
-(setf (gethash "rspec-backtrace" realgud:rdb2-pat-hash)
-      realgud-rspec-backtrace-loc-pat)
+(when (boundp 'realgud-rspec-backtrace-loc-pat)
+  (setf (gethash "rspec-backtrace" realgud:rdb2-pat-hash)
+	realgud-rspec-backtrace-loc-pat))
 
 ;;  Regular expression that describes a debugger "backtrace" command line.
 ;;  e.g.

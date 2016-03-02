@@ -1,9 +1,9 @@
 ;; Press C-x C-e at the end of the next line to run this file test non-interactively
-;; (test-simple-run "emacs -batch -L %s -l %s" (file-name-directory (locate-library "test-simple.elc")) buffer-file-name)
+;; (test-simple-run "emacs -batch -L %s -L %s -l %s" (file-name-directory (locate-library "test-simple.elc")) (file-name-directory (locate-library "realgud.elc")) buffer-file-name)
 
 (require 'test-simple)
 (require 'load-relative)
-(require 'realgud-buffer-command)
+(require 'realgud)
 (load-file "../rdb2/init.el")
 (load-file "./regexp-helper.el")
 
