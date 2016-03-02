@@ -1,9 +1,9 @@
-;;; realgud-rdb2.el --- front-end for interacting with Ruby debugger2
+;;; realgud-rdb2.el --- realgud front-end for interacting with Ruby debugger2
 
 ;; Author: Rocky Bernstein
 ;; Version: 1.0
 ;; Package-Requires: ((realgud "1.3"))
-;; URL: http://github.com/ko1/debugger2
+;; URL: http://github.com/rocky/realgud-ruby-debugger2
 ;; Compatibility: GNU Emacs 24.x
 
 ;; Copyright (C) 2016 Free Software Foundation, Inc
@@ -44,6 +44,5 @@
 (require-relative-list '( "./rdb2/rdb2" ) "realgud-")
 
 (provide-me)
-
 
 ;;; realgud-rdb2.el ends here
