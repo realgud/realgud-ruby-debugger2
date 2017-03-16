@@ -1,3 +1,6 @@
+lisp_files = $(wildcard *.el)
+EXTRA_DIST = $(lisp_files)
+lisp_LISP = $(lisp_files)
 include $(top_srcdir)/common.mk
 
 PHONY=check test all check-elget test-elget help
@@ -62,6 +65,8 @@ test-%.run:
 #: Run tests using el-get to specify external Lisp dependencies
 test-%.elrun:
 	(cd $(top_srcdir)/test && $(EMACS) --batch --no-site-file --no-splash --load ../el-get-install.el --load $(@:.elrun=.el))
+
+install-lispLISP: $(lisp_LISP) $(ELCFILES)
 
 # Whatever it is you want to do, it should be forwarded to the
 # to top-level directories
